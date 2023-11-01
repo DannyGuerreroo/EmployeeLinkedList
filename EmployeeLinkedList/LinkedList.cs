@@ -11,7 +11,7 @@ namespace EmployeeLinkedList
     {
         private Node _head = null;
         private Node _tail = null;
-        private Node _guh = null;
+        private Node _cemployee = null;
 
         public void Add(Employee input)
         // Adds an employee to the linked list
@@ -25,10 +25,11 @@ namespace EmployeeLinkedList
             }
             else
             {
-                _guh = new Node(input);
+                // Storing current input as a node so the first and last names can be accessed
+                _cemployee = new Node(input); 
 
                 // If input is less than the head, adds a new head
-                if (_head.NameData.CompareTo(input.Name) >= 0)
+                if (_head.LastName.CompareTo(_cemployee.LastName) >= 0)
                 {
                     Node oldHead = _head;
                     Node newHead = new(input, oldHead);
@@ -42,8 +43,44 @@ namespace EmployeeLinkedList
 
             while (current != null)
             {
+
+                //if (current.LastName == _cemployee.LastName)
+                //{
+                //    Console.WriteLine("DUPE: " + current.NameData + " " + _cemployee.NameData);
+
+                //    bool LessThan = current.FirstName.CompareTo(_cemployee.FirstName) > 0;
+                //    bool GreaterThan = current.FirstName.CompareTo(_cemployee.FirstName) < 0;
+
+                //    if (current.FirstName.CompareTo(_cemployee.FirstName) > 0)
+                //    {
+                //        Node oldPrevious = current.Previous;
+                //        Node newCurrent = new Node(input, current, oldPrevious);
+                //        current.Previous.Next = newCurrent;
+                //        return;
+                //    }
+                //    else
+                //    {
+                //        // If current is the end of the list:
+                //        if (current.Next == null)
+                //        {
+                //            Node newNode = new Node(input, null, current);
+                //            _tail = newNode;
+                //            current.Next = newNode;
+                //            return;
+                //        }
+                //        // If the input is less than next
+                //        if (current.Next.LastName.CompareTo(_cemployee.LastName) > 0)
+                //        {
+                //            Node oldNext = current.Next;
+                //            current.Next = new Node(input, oldNext, oldNext.Previous);
+                //            return;
+                //        }
+
+                //    }
+                //}
+
                 // If current is greater than the input:
-                if (current.NameData.CompareTo(input.Name) > 0)
+                if (current.LastName.CompareTo(_cemployee.LastName) > 0)
                 {
                     Node oldCurrent = current;
                     Node newCurrent = new(input);
@@ -63,7 +100,7 @@ namespace EmployeeLinkedList
                         return;
                     }
                     // If the input is less than next
-                    if (current.Next.LastName.CompareTo(input.Name) > 0)
+                    if (current.Next.LastName.CompareTo(_cemployee.LastName) > 0)
                     {
                         Node oldNext = current.Next;
                         current.Next = new Node(input, oldNext, oldNext.Previous);
@@ -82,7 +119,7 @@ namespace EmployeeLinkedList
 
             while (current != null)
             {
-                if (current.LastName == input)
+                if (string.Equals(current.NameData, input, StringComparison.OrdinalIgnoreCase)) // Case insensitive check
                 {
                     return current;
                 }
@@ -121,6 +158,7 @@ namespace EmployeeLinkedList
             {
                 target.Previous.Next = target.Next;
             }
+            Console.WriteLine("Deleted: " + target.NameData);
             return true;
         }
 
@@ -130,7 +168,7 @@ namespace EmployeeLinkedList
             Node current = _head;
             while (current != null )
             {
-                Console.WriteLine(current.FirstName + ", " + current.LastName
+                Console.WriteLine(current.LastName + ", " + current.FirstName
                     + " - " + current.Gender
                     + " " + current.Salary.ToString("C")
                     + " " + current.Department);

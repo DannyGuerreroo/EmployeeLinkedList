@@ -1,1 +1,25 @@
-﻿
+﻿I started this project by implementing the .csv file import, which was simple enough.
+
+I wanted to use a double linked list for this project, as we had went over it previously in class.
+I figured that I should start by coding the linked list, as it is an integral part of the assignment.
+I started coding the linked list, and figured that I would add the rest of the requirements when I had the base.
+I made the base linked list code off of what we went over in class.
+However, this caused some complications when modifying this base for the assignement requirements.
+
+I struggled to figure out how to sort by an employee's first and last name, as I could only get their full, un-split, name from the csv.
+I solved this by just storing the current employee input as a node so I could access their first and last name, as the GetName() function is in the Node class.
+
+The sort order of the linked list was seemingly functional when searching by last name,
+but in the case of duplicate last names, the first names would make the list not be sorted, as the first names weren't in order.
+I tried and tried to get my list to account for the first names if the last names of the current node and input were equal,
+but it only ended up causing more problems like other nodes disappearing for seemingly no reason.
+
+My delete function also was not properly working, as it would delete more than just the specified employee's node.
+
+I believe these problems to be caused by an underlying fault in my base linked list code, but
+fixing that seems like a monumental task at this point, as I don't have a clue on where to start.
+
+I hadn't done much analyzing of this project before I started, I thought that just making the
+linked list and going from there was the best course of action.
+I believe this to have hindered my efficiency and success with this project, as I have spent more time
+fixing and trying to get old code to work than writing new code, with the new code I write breaking the code that came before.
