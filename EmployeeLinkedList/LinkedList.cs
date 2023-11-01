@@ -125,6 +125,7 @@ namespace EmployeeLinkedList
                 }
                 current = current.Next;
             }
+            Console.WriteLine("Employee not found.");
             return null;
         }
 
@@ -198,6 +199,12 @@ namespace EmployeeLinkedList
             {
                 Console.WriteLine("No employees in list.");
             }
+        }
+
+        public void DisplayEmployeeData(Node input) // Display employee data function for efficiency
+        {
+            Console.WriteLine(input.NameData + " - " + input.Gender
+                + " " + input.SalaryData + " " + input.Department);
         }
     }
 }

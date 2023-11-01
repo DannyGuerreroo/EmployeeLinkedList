@@ -45,6 +45,41 @@ namespace EmployeeLinkedList
                         List.PrintFullEmployeeList();
                         break;
                     case '2': // Searches for and displays an employee
+                        bool searchLooper = true;
+                        while (searchLooper == true) // A loop so user can keep selecting options
+                        {
+                            Console.WriteLine("Search by Last Name, First Name, or Department? (1, 2, or 3)");
+                            char searchKeyInput = Console.ReadKey().KeyChar;
+                            Console.WriteLine("\n");
+
+                            if (searchKeyInput == '1')
+                            {
+                                searchLooper = false;
+                                Console.WriteLine("Input the desired employee's last name: (ex: Bob) ");
+                            }
+                            else if (searchKeyInput == '2')
+                            {
+                                searchLooper = false;
+                                Console.WriteLine("Input the desired employee's first name: (ex: Bob) ");
+                            }
+                            else if (searchKeyInput == '3')
+                            {
+                                searchLooper = false;
+                                Console.WriteLine("Type the desired department: ");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Incorrect option, try again.");
+                            }
+                        }
+                        Console.WriteLine("Input the desired employee's full name: (ex: Dave Bob) ");
+                        string searchInput = Console.ReadLine();
+                        Node searchOutput = List.Find(searchInput);
+                        if (searchOutput != null)
+                        {
+                            List.DisplayEmployeeData(List.Find(searchInput));
+                        }
+                        
                         break;
                     case '3': // Adds an employee
                         Console.WriteLine("");
@@ -62,6 +97,9 @@ namespace EmployeeLinkedList
                     case '7': // Quits the program
                         Looper = false;
                         Console.WriteLine("Thank you for using the EmployeeLinkedList program. Goodbye.");
+                        break;
+                    default:
+                        Console.WriteLine("Incorrect option, try again.");
                         break;
                 }
             }

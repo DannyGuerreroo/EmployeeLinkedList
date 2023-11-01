@@ -6,6 +6,9 @@ I started coding the linked list, and figured that I would add the rest of the r
 I made the base linked list code off of what we went over in class.
 However, this caused some complications when modifying this base for the assignement requirements.
 
+I made a node class for the nodes of the linked list. In this node class, I stored the data for the employee, which I
+believe to have been very efficient, as I could easily access every employee's data.
+
 I struggled to figure out how to sort by an employee's first and last name, as I could only get their full, un-split, name from the csv.
 I solved this by just storing the current employee input as a node so I could access their first and last name, as the GetName() function is in the Node class.
 
