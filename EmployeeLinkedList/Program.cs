@@ -11,18 +11,12 @@ namespace EmployeeLinkedList
             EmployeeCSVImport import = new EmployeeCSVImport();
             List<Employee> employeeslist = import.ImportEmployees("employees-1.csv");
 
-            var List = new LinkedList();
+            var List = new Company();
 
             foreach (var employee in employeeslist)
             {
                 List.Add(employee);
             }
-
-            //List.PrintFullEmployeeList();
-            //Console.WriteLine("\n");
-            //List.Delete("Wheeler");
-            //Console.WriteLine("\n");
-            //List.PrintFullEmployeeList();
 
             bool Looper = true;
             while (Looper == true) // A loop so user can keep selecting options
@@ -34,7 +28,8 @@ namespace EmployeeLinkedList
                 Console.WriteLine("4: View Average Salary of all Employees");
                 Console.WriteLine("5: Edit an Employee");
                 Console.WriteLine("6: Delete an Employee");
-                Console.WriteLine("7: Quit Program");
+                Console.WriteLine("7: View Department List");
+                Console.WriteLine("8: Quit Program");
 
                 char sInput = Console.ReadKey().KeyChar; // Reading user input
                 Console.WriteLine("\n");
@@ -45,56 +40,73 @@ namespace EmployeeLinkedList
                         List.PrintFullEmployeeList();
                         break;
                     case '2': // Searches for and displays an employee
-                        bool searchLooper = true;
-                        while (searchLooper == true) // A loop so user can keep selecting options
+                        Node SearchedEmployee = List.SearchForEmployee();
+                        if (SearchedEmployee != null)
                         {
-                            Console.WriteLine("Search by Last Name, First Name, or Department? (1, 2, or 3)");
-                            char searchKeyInput = Console.ReadKey().KeyChar;
-                            Console.WriteLine("\n");
-
-                            if (searchKeyInput == '1')
-                            {
-                                searchLooper = false;
-                                Console.WriteLine("Input the desired employee's last name: (ex: Bob) ");
-                            }
-                            else if (searchKeyInput == '2')
-                            {
-                                searchLooper = false;
-                                Console.WriteLine("Input the desired employee's first name: (ex: Bob) ");
-                            }
-                            else if (searchKeyInput == '3')
-                            {
-                                searchLooper = false;
-                                Console.WriteLine("Type the desired department: ");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Incorrect option, try again.");
-                            }
+                            List.DisplayEmployeeData(SearchedEmployee);
                         }
-                        Console.WriteLine("Input the desired employee's full name: (ex: Dave Bob) ");
-                        string searchInput = Console.ReadLine();
-                        Node searchOutput = List.Find(searchInput);
-                        if (searchOutput != null)
-                        {
-                            List.DisplayEmployeeData(List.Find(searchInput));
-                        }
-                        
                         break;
                     case '3': // Adds an employee
-                        Console.WriteLine("");
+                        Console.WriteLine("Input the new employee's First Name: (ex: Bob)");
+                        string newFirst = Console.ReadLine();
+                        Console.WriteLine("Input the new employee's Last Name: (ex: Dave)");
+                        string newLast = Console.ReadLine();
+                        Console.WriteLine("Input their Gender: (ex: M)");
+                        string newGender = Console.ReadLine();
+                        Console.WriteLine("Input their Salary: (ex: 1234.56)");
+                        float newSalary = -1;
+                        if (float.TryParse(Console.ReadLine(), out float floatValue))
+                        {
+                            newSalary = floatValue; // Parses user input into a float
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid float.");
+                            break;
+                        }
+                        Console.WriteLine("Input their Department: (ex: FINANCE)");
+                        string newDepartment = Console.ReadLine();
+                        if (newLast != "" && newFirst != ""
+                            && newGender != "" && newSalary >= 0
+                            && newDepartment != "") // Checks if user inputted nothing for one of the entries
+                        {
+                            string newFull = newFirst + " " + newLast;
+                            Employee NewEmployee = new Employee();
+                            NewEmployee.Name = newFull;
+                            NewEmployee.Gender = newGender;
+                            NewEmployee.Salary = newSalary.ToString("C");
+                            NewEmployee.Department = newDepartment.ToUpper();
+                            List.Add(NewEmployee);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error: An incorrect value was entered");
+                        }
                         break;
                     case '4': // Views Average Salary of all Employees
                         List.GetAverageSalary();
                         break;
                     case '5': // Edits an Employee
+                        Console.WriteLine("Search for the employee you would like to edit:");
+                        Node FoundEmployee = List.SearchForEmployee();
+                        if (FoundEmployee != null)
+                        {
+                            List.DisplayEmployeeData(FoundEmployee);
+                            List.EditEmployee(FoundEmployee);
+                        }
                         break;
                     case '6': // Deletes an Employee
                         Console.WriteLine("Input the desired employee's full name: (ex: Dave Bob) ");
                         string deleteInput = Console.ReadLine();
-                        List.Delete(deleteInput);
+                        if (List.Delete(deleteInput))
+                        {
+                            Console.WriteLine("Deleted: " + deleteInput);
+                        }
                         break;
-                    case '7': // Quits the program
+                    case '7': // Displays department list
+                        List.PrintDepartments();
+                        break;
+                    case '8': // Quits the program
                         Looper = false;
                         Console.WriteLine("Thank you for using the EmployeeLinkedList program. Goodbye.");
                         break;

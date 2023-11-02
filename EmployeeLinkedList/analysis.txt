@@ -1,6 +1,9 @@
 ﻿I started this project by implementing the .csv file import, which was simple enough.
 
 I wanted to use a double linked list for this project, as we had went over it previously in class.
+I didn't put much thought to it as I just assumed it to be the best choice because I at least had
+some sort of idea on how to use it (which turned out to not be very true).
+
 I figured that I should start by coding the linked list, as it is an integral part of the assignment.
 I started coding the linked list, and figured that I would add the rest of the requirements when I had the base.
 I made the base linked list code off of what we went over in class.
@@ -26,3 +29,48 @@ I hadn't done much analyzing of this project before I started, I thought that ju
 linked list and going from there was the best course of action.
 I believe this to have hindered my efficiency and success with this project, as I have spent more time
 fixing and trying to get old code to work than writing new code, with the new code I write breaking the code that came before.
+
+Though my linked list had problems with sorting, I decided to move on and work on the program's functions and logic first.
+I figured that solving the sorting would be best saved for last, as I wanted to have a more complete program before spending
+loads of time on trying to solve such a complicated (for me) problem.
+
+For my search/find employee function, I accounted for the requirement of searching by last, first, and department
+by passing in an enum into the function. The enum makes it possible to search by the choices, which is efficient because
+it allows the user to select a type while reducing the amount of code.
+
+Adding an employee was made quite easy, as I would just re-use my Add() function for it.
+
+To display the average salary for all employees, I stored their salaries as a float separate from their salary string
+in the Node class. I think that I didn't need to have separate variables for this, which might have made the process
+more efficient as less memory would have to be used?
+
+Editing an employee was also made quite simple. An employee's elements, other than name, don't effect the sort order
+at all so their value could be changed freely.
+Since names effect the order, I just deleted the employee and re-added them in order to resort them into the list efficiently.
+
+My choice to make the Add, Delete, and Find functions were very beneficial to me and the 
+program's efficiency because I could use them for the various menu options since they are versatile.
+
+For example, my Delete() function used the Find() function in order to select an employee.
+
+I efficiently accounted for the case-insensitive and currency form requirements by simply making
+all string comparisons convert to lower/upper before comparing, and having all money values convert to
+a proper currency form with the ToString("C") function.
+
+I accounted for edge cases by making if statements for the first node in the list (_head)
+
+After completing the rest of the program, I needed to look back on my sorting logic for the linked list.
+I had realized that using a double-linked list in general might not have been the simplest choice for this project.
+It added a lot of complexity for me, and I think that could have been avoided.
+I think I should've thought about this project more and how I should've approached it, because
+I might have come to a better conclusion on which sorting method to use, which would've made my life easier.
+
+I decided to re-make my sorting, and came to create a much more effective Add() function than I had before.
+I had realized I was overthinking it, so I made it again from scratch and ended up with a working sorted list.
+I still made a double-linked list because I liked the advantage of having a .Previous and the program was
+already coded around this.
+
+An area that I think could be more efficient is my importing of the employees. I think there might've been
+a way to get the employee's first and last name without using another function.
+I also might not have needed to store the employee's data in the Node as well if I had thought about
+my Company class'/Employee class scopes a bit more before starting.
