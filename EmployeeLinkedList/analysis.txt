@@ -74,3 +74,6 @@ An area that I think could be more efficient is my importing of the employees. I
 a way to get the employee's first and last name without using another function.
 I also might not have needed to store the employee's data in the Node as well if I had thought about
 my Company class'/Employee class scopes a bit more before starting.
+
+Overall, I think the choice to make a double-linked list was alright, as I think it is an efficient way
+of sorting over something like a bubble sort.
